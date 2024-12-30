@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="./js/settings.js"></script>
+        <script src="./js/iframekey.js"></script>
+        <style>
+            @keyframes targetblink{
+                0%{background-color:transparent;border-radius:50px;}
+                100%{background-color: #2277aa99;border-radius:0px;}
+            }
+            :target{
+                animation-name: targetblink;
+                animation-duration: calc(500ms / 3);
+                animation-iteration-count: 3;
+            }
+            body{
+                margin-left:6.25vw;
+                margin-right:6.25vw;
+                font-size:15px;
+            }
+            table{
+                width:100%;
+            }
+            td{
+                vertical-align: center;
+            }
+            select{
+                height:30px;
+                font-size:15px;
+                outline:none;
+                border:none;
+                border-radius:5px;
+                background-color:#eeeeee88;
+                padding:2px;
+                cursor:pointer;
+            }
+            input[type="text"]{
+                font-family: monospace;
+                outline:none;
+                border:none;
+                border-bottom: 3px solid gray;
+            }
+            input[type="text"]:focus{
+                border-bottom: 3px solid blue;
+            }
+            input[type="color"]{
+                border-radius:50%;
+                width:20px;
+                height:20px;
+                padding:0;
+                overflow:hidden;
+                border-color:#00000011;
+                cursor: pointer;
+            }
+            input[type="color"]:focus{
+                border:1px solid #00000011;
+            }
+            input[type="color"]::-webkit-color-swatch-wrapper{
+                padding:0;
+            }
+            input[type="color"]::-webkit-color-swatch{
+                border-width:0px;
+            }
+            table:has(select[value="デジタル"]) .analogclocksettings{
+                display:none;
+            }
+            table:has(select[value="アナログ"]) .segmentsettings{
+                display:none;
+            }
+            input[type="text"]{
+        border-radius:10px;
+        border:none;
+        border-bottom:2px solid #555555;
+        background-color:#ffffff88;
+        height:30px;
+        width:200px;
+        padding-left:5px;
+    }
+    input[type="text"]:focus{
+        border-bottom:2px solid #2277aa;
+        outline:none;
+    }
+    toggle-button{
+        cursor: pointer;
+    }
+        </style>
+    </head>
+    <body>
+    <div style="display: flex;justify-content: space-between;align-items: center;"><h1>設定</h1><div style="display: flex;width:fit-content"><div style="padding-top:5px;padding-bottom:5px;padding-left:10px;padding-right:10px;border-radius: 10px;background-color: #ffffff88;margin-right:5px;user-select:none;cursor:pointer;" id="showkeyboardshortcuts">キーボードショートカット表示</div><div style="padding-top:5px;padding-bottom:5px;padding-left:10px;padding-right:10px;border-radius: 10px;background-color: #ffffff88;user-select:none;cursor:pointer" id="savebutton">保存して再起動</div></div></div>
+    <table style="table-layout: fixed;">
+        <tr><td><div>背景の種類</div></td><td><select><option value="clock">時計</option></select></td></tr>
+        <tr><td><div>背景色</div></td><td><input type="color" id="setting_background"></td></tr>
+        <tr><td><div>時計タイプ</div></td><td><select id="setting_clocktype"><option value="デジタル">セグメント</option><option value="アナログ">アナログ</option></select></td></tr>
+        <tr class="segmentsettings"><td><div>セグメントの色</div></td><td><input type="color" id="setting_segmentcolor"></td></tr>
+        <tr class="analogclocksettings"><td><div>針の色</div></td><td><input type="color" id="setting_handcolor"></td></tr>
+        <tr class="analogclocksettings"><td><div>文字盤の色</div></td><td><input type="color" id="setting_clockcolor"></td></tr>
+        <tr id="weather_area_select_row"><td>天気の地域</td><td><select id="weather_area_select"></select></td></tr>
+        <tr><td><div>Bing検索</div></td><td><toggle-button id="setting_bing"></toggle-button></td></tr>
+        <tr><td><div>タブの名前</div></td><td><input id="setting_tabtitle" type="text"></td></tr>
+        <tr><td style="vertical-align: top;"><div>表示するメニュー</div></td><td>
+            <table id="menusettings">
+                <tr><td><label><input type="checkbox" checked disabled data-url="googleapps.html">アプリ</label></td></tr>
+                <tr><td><label><input type="checkbox" checked disabled data-url="weather.html">天気</label></td></tr>
+                <tr><td><label><input type="checkbox" data-url="random.html">乱数</label></td></tr>
+                <tr><td><label><input type="checkbox" data-url="clocktimer.html">タイマー</label></td></tr>
+                <tr><td><label><input type="checkbox" data-url="primenumber.html">素数判定</label></td></tr>
+                <tr><td><label><input type="checkbox" data-url="qrcodereader1.html">コードリーダー(ChromeOS only)</label></td></tr>
+                <tr><td><label><input type="checkbox" checked data-url="settings.html" disabled>設定</label></td></tr>
+                <tr><td><label><input type="checkbox" checked data-url="about.html" disabled>バージョン情報</label></td></tr>
+            </table>
+        </td></tr>        
+    </table>
+    </body>
+    <script src="./js/toggle.js"></script>
+</html>

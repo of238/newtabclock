@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html><head>
+<script src="./js/weather_popup.js"></script>
+<script src="./js/iframekey.js"></script>
+<style>
+    *{
+        font-size:20px;
+        transition: all 500ms;
+    }
+    #weatherarea{
+        font-size:inherit;
+    }
+    #weatherarea_container{
+        font-size:25px;
+    }
+    #weathertempmax{
+        color:red;
+    }
+    #weathertempmin{
+        color:blue;
+    }
+    #load{
+        position:fixed;
+        top:5%;
+        left:5%;
+        width:90%;
+        height:90%;
+        background:white;
+        opacity: 0;
+    }
+    svg{
+        width:150px;
+    }
+    #weatherwind,#weatherwave{
+        font-size:16px;
+    }
+</style>
+</head><body style="height:100vh;margin:0px;overflow:hidden;">
+    <div style="position:fixed;right:100px;top:5vh;z-index:2;user-select: none;"><div style="padding-top:5px;padding-bottom:5px;padding-left:10px;padding-right:10px;border-radius: 10px;background-color: #ffffff88;cursor:pointer;" id="settingbutton">設定</div></div>
+    <div id="load">読み込み中</div>
+    <div style="margin:8px;padding-left:10vw;padding-top:5vh">
+    <div id="weatherarea_container"><span id="weatherarea"></span> の天気</div>
+    <div id="weathertext"></div>
+    <div id="weatherimage"></div>
+    <div><span id="weathertempmax"></span>/<span id="weathertempmin"></span></div>
+    <div id="weatherwind"></div>
+    <div id="weatherwave"></div>
+    <div id="apiname" style="position:fixed;bottom:0;"></div>
+    </div>
+</body>
+</html>

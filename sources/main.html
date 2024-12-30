@@ -1,0 +1,236 @@
+<head>
+<!--<title>新しきタブ</title>-->
+<meta charset="utf-8">
+<script src="./js/topmain.js"></script>
+<script src="./js/weather.js"></script>
+<script src="./js/popup.js"></script>
+<script src="./js/key.js"></script>
+<link rel="icon" href="new_tab_page_negate.png"></link>
+<style>
+    *{transition-duration:200ms;transition-property: all;user-select: none;}
+    body{background-color:black}
+    #inputbox,#inputbox2{
+        appearance: none;
+        position:relative;
+        top:calc(44dvh - 44px);
+        max-width:561px;
+        width:48vw;
+        height:44px;
+        font-size:16px;
+        padding-inline-start: 52px;
+        padding-inline-end:87px;
+        border:none;
+        border-radius:22px;
+        z-index:2;
+        font-family:initial;
+        background-color:transparent;
+    }
+    #inputbox{left:0;}
+    #inputbox2{right:0;}
+    #inputbox:focus,#inputbox2:focus{
+        outline:none;
+    }
+    #inputbox::placeholder,#inputbox::placeholder{
+        color:#454545;
+    }
+    .graytext{
+        color:#454545;
+    }
+    #inputbox::-webkit-search-cancel-button,#inputbox2::-webkit-search-cancel-button{
+         appearance: none;
+    }
+    #logo,#logo2{
+        position: sticky;
+        top:24dvh;
+        height: 92px;
+        margin:10px
+    }
+    #logo{left:calc(50vw - 136px - calc(48vw / 2));width: 272px;}
+    #logo2{right:calc(50vw - 200px - calc(48vw / 2));width:400px}
+    .matches:hover{
+        background-color: #20212419;
+    }
+    .matches:focus{
+        background-color: #20212419;
+        outline:none;
+    }
+    #list > :first-child,#list2 > :first-child{
+        border-left:blue;
+    }
+    #weather{
+        cursor: pointer;
+        user-select:none;
+        position:fixed;
+        bottom:0;
+        left:0;
+        color:white;
+        display: flex;
+        flex-flow:column;
+    }
+    #weatherimage svg{
+        width:50px;
+    }
+    .popup-menu-bar-item{
+        height:100%;
+        /*display:flex;*/
+        display:none;
+        align-items:center;
+        justify-content:center;
+        width:100px;
+        min-width: 100px;
+        background-color:#20232433;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        user-select: none;
+        cursor:pointer;
+    }
+    .popup-menu-bar-item.important{
+        display:flex;
+    }
+    .popup-menu-bar-item:hover{
+        background-color: #2023a411;
+    }
+    .popup-menu-bar-item[data-focus='']{
+        background-color:#8890ff;
+    }
+    #popup-menu-bar{
+        width:87.5%;
+        margin-left:6.25%;
+        height:30px;
+        min-height: 30px;
+        display:flex;
+        overflow:scroll;
+        background-color:#20232416;
+    }
+    #popup-menu-bar::-webkit-scrollbar{
+        display:none;
+    }
+    #popup-background{
+        position:fixed;
+        width:100vw;
+        height:100dvh;
+        top:190dvh;
+        z-index:4;
+        background-color: #00000066;
+        backdrop-filter:blur(8px);
+        transition-duration:0ms;
+    }
+    #popup{
+        z-index:10;
+        position:fixed;
+        top:200dvh;
+        left:10vw;
+        width:80vw;
+        height:80dvh;
+        background-color:#ccca;
+        display:flex;flex-direction:column;
+        border-radius: 5vw;
+        overflow: hidden;
+    }
+    .popupcontent{
+        width:100%;
+        border:0;
+        height:100%;
+        border-bottom-left-radius: 5vw;
+        border-bottom-right-radius: 5vw;
+        border:none;
+        display: none;
+    }
+    .popupcontent.show{
+        display:block;
+    }
+    #popup-content{
+        width:100%;
+        margin:0;
+        height:100%;
+        transition-duration: 0ms;
+    }
+    #popup-content:has(iframe[src="clocktimer.html"]){
+        background-color:black;
+    }
+    #list,#list2{
+        background-color:#ffffffb0;
+        backdrop-filter:blur(15px);
+        max-width: 561px;
+    }
+    #list *,#list2 *{white-space: nowrap;overflow:hidden;}
+    #popupmessage_min,#popupmessage_windowsizechange,#popupmessage_close{
+        outline:none;
+        height:100%;
+        background-color:transparent;
+        border:none;
+    }
+    #popupmessage_min:hover,#popupmessage_windowsizechange:hover,#popupmessage_close:hover{
+        background-color:#eee5
+    }
+    #popup-button{
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content:center;
+        width:40px;
+        height:40px;
+        position:fixed;
+        bottom:5px;
+        right:5px;
+        background-color: #2240bb;
+        cursor:pointer;
+    }
+</style>
+<style id="style">
+    .bing_search_area{
+        display:none !important;
+    }
+</style>
+</head>
+<body style="margin:0;overflow: hidden;">
+    <div id="popupmessage" style="border-radius:10px;position:absolute;width:70vw;height:70dvh;display:none;z-index:calc(infinity);background-color: #fffb;backdrop-filter:blur(8px);overflow: hidden;min-width:100px;min-height:100px;max-width: 100vw;max-height:100dvh">
+        <div style="background-color:#aaaa;position:absolute;top:0;right:0;height:20px;width:100%;display:flex;justify-content: right;z-index:10;" id="popupwindowmenubar"><button id="popupmessage_min"><img style="height:100%" src="./svg/min.svg"></button><button id="popupmessage_windowsizechange"><img style="height:100%" src="./svg/max.svg"></button><button id="popupmessage_close"><img style="height:100%" src="./svg/close.svg"></button></div>
+        <div style="position:absolute;width:10px;right:0;top:0;height:calc(100% - 10px);cursor:e-resize" id="popupmessage_resize_right"></div>
+        <div style="position:absolute;width:10px;left:0;top:0;height:calc(100% - 10px);cursor:w-resize" id="popupmessage_resize_left"></div>
+        <div style="position:absolute;height:10px;left:0;bottom:0;width:calc(100% - 10px);cursor:s-resize" id="popupmessage_resize_bottom"></div>
+        <div style="position:absolute;height:10px;right:0;bottom:0;width:10px;cursor:se-resize" id="popupmessage_resize_right_bottom"></div>
+        <div style="position:absolute;height:10px;left:0;bottom:0;width:10px;cursor:sw-resize" id="popupmessage_resize_left_bottom"></div>
+        <div style="position:absolute;top:20px;width:100%;height:calc(100% - 20px);z-index:-1;">
+            <iframe name="popupwindowframe" style="width:100%;height:100%;border:none;"></iframe>
+        </div>
+    </div>
+    <iframe id="clockframe" style="width:100vw;height:100dvh;border:none;position:fixed;background-color:black;" sandbox="allow-scripts"></iframe>
+<div style="display: flex;justify-content: center;position:fixed;width:100vw;height:100dvh">
+<div style="width:561px;display:flex;justify-content: center;">
+<div style="-webkit-mask-image:url(./svg/google_logo.svg);-webkit-mask-repeat:no-repeat;-webkit-mask-size:100%;background-color:white" id="logo"></div></div>
+<div style="width:561px;display:flex;justify-content: center;" class="bing_search_area">
+<div style="-webkit-mask-image:url(./svg/bing_logo.svg);-webkit-mask-repeat:no-repeat;-webkit-mask-size:100%;background-color:white" id="logo2"></div></div>
+</div>
+<div style="display:flex;justify-content: center;gap:20px">
+<div>
+<div style="z-index:3;border-radius:22px;position:relative;top:calc(44dvh);left:0/*calc(50vw - 280px)*/;padding-left:10px;background-color:transparent;width:40px;height:44px;display: flex;justify-content: center;align-items: center;"><div style="display:block;margin:auto;width:27px;height:27px;background-repeat:no-repeat;background-size:100%;background-image: url(./svg/google_g.svg);"></div></div>
+<input id="inputbox" placeholder="Google で検索または URL を入力" type="search" autocomplete="off" spellcheck="false">
+<div style="position:relative;top:calc(44dvh - 44px - 44px);border-radius:22px;z-index:1;padding-top:44px;width:calc(48vw);font-size:16px;/*padding-left:52px*/font-family:initial;" id="list"></div>
+</div>
+<div class="bing_search_area">
+    <div style="z-index:3;border-radius:22px;position:relative;top:calc(44dvh);right:0/*calc(50vw - 280px)*/;padding-left:10px;background-color:transparent;width:40px;height:44px;display: flex;justify-content: center;align-items: center;"><div style="display:block;margin:auto;width:27px;height:27px;background-repeat:no-repeat;background-size:100%;background-image: url(./svg/bing_b.svg);"></div></div>
+    <input id="inputbox2" placeholder="Bing で検索または URL を入力" type="search" autocomplete="off" spellcheck="false">
+    <div style="position:relative;top:calc(44dvh - 44px - 44px);border-radius:22px;z-index:1;padding-top:44px;width:calc(48vw);font-size:16px;/*padding-left:52px*/font-family:initial;" id="list2"></div>
+</div>
+</div>
+<div id="weather"><div style="margin-left: 10px;margin-bottom:-10px;" id="weatherarea"></div><div style="display:flex;align-items:center;"><div id="weatherimage"></div><div id="weathertext" style="margin-top:10px"></div><div style="margin-left:10px;margin-bottom:-10px;font-size:10px;" id="apiname"></div></div></div>
+<div id="popup-background"></div>
+<div id="popup">
+<div id="popup-menu-bar">
+    <div class="popup-menu-bar-item important" data-url="googleapps.html"><div>アプリ</div></div>
+    <div class="popup-menu-bar-item important" data-url="weather.html"><div>天気</div></div>
+    <div class="popup-menu-bar-item" data-url="random.html"><div>乱数</div></div>
+    <div class="popup-menu-bar-item" data-url="clocktimer.html"><div>タイマー</div></div>
+    <div class="popup-menu-bar-item" data-url="primenumber.html"><div>素数判定</div></div>
+    <div class="popup-menu-bar-item" data-url="qrcodereader1.html"><div>コードリーダー</div></div>
+    <div class="popup-menu-bar-item important" data-url="settings.html"><div>設定</div></div>
+    <div class="popup-menu-bar-item important" data-url="about.html"><div>バージョン情報</div></div>
+</div>
+<div id="popup-content">
+
+</div>
+</div>
+<div id="popup-button">
+    <div style="-webkit-mask-image:url('./svg/menu.svg');-webkit-mask-repeat:no-repeat;-webkit-mask-size:100%;height:70%;width:70%;background-color:white"></div>
+</div>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="./js/about.js"></script>
+        <script src="./js/iframekey.js"></script>
+        <style>*{font-size:1.1rem;}
+            @media (width < 450px){#downloadnewcrxfile{display:none}}</style>
+    </head>
+    <body>
+        <div style="position:fixed;top:5px;right:20px;display:flex;">
+            <div style="padding-top:5px;padding-bottom:5px;padding-left:10px;padding-right:10px;border-radius: 10px;background-color: #ffffff88;margin-right:5px;font-size:1rem;user-select:none;cursor:pointer" id="importsettings">設定Import</div>
+            <div style="padding-top:5px;padding-bottom:5px;padding-left:10px;padding-right:10px;border-radius: 10px;background-color: #ffffff88;margin-right:5px;font-size:1rem;user-select:none;cursor:pointer" id="exportsettings">設定Export</div>
+            <div style="padding-top:5px;padding-bottom:5px;padding-left:10px;padding-right:10px;border-radius: 10px;background-color: #ffffff88;margin-right:5px;font-size:1rem;user-select:none;cursor:pointer" id="downloadnewcrxfile">最新crxのDownload</div>
+        </div>
+        <div style="padding-left:6.25dvw;">
+        <div>バージョン:<span id="versiondata"></span></div>
+        <div id="islatest">&nbsp;</div>
+        <textarea readonly id="infomation" style="width:70dvw;height:75dvh;outline:none;border-radius: 10px;resize: none;padding:10px;background-color:#ffffff88"></textarea>
+        <a id="downloadlink" style="display:none"></a>
+        <input type="file" id="fileinput" style="display:none" accept=".ntcs">
+        </div>
+    </body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="./js/iframekey.js"></script>
+        <script src="./js/googleapps2.js"></script>
+        <style>
+            *{
+                transition: all 500ms;
+            }
+            .item-container{
+                display:flex;
+                flex-wrap: wrap;
+                padding-inline-start: 3%;
+                padding-inline-end: 3%;;
+            }
+            .item{
+                width:160px;
+            }
+            .item figure{
+                width:80%;
+                margin-inline-start: 0;
+            }
+            .item figure img{
+                width:100%;
+            }
+            figcaption{
+                text-align: center;
+                font-size:20px;
+            }
+            a{
+                text-decoration: none;
+                color:black;
+                cursor:pointer;
+            }
+            ::-webkit-scrollbar{
+                display:none;
+            }
+            .dragover{
+                filter:grayscale(60%);
+                padding-left:80px;
+            }
+            input[type="text"],input[type="url"]{
+                height:2em;
+                width:10em;
+                border-radius: 0.5em;
+                outline:none;
+                border:none;
+                padding-left:1em;
+                background:#ccc;
+                color:#111;
+            }
+            button{
+                height:2em;
+                width:fit-content;
+                min-width:55px;
+                border-radius: 0.5em;
+                outline:none;
+                border:none;
+                background:#ccc;
+                color:#111;
+                cursor: pointer;
+            }
+            button#addappdialog_ok{
+                background-color:#99d;
+            }
+            dialog{
+                outline:none;
+                border:none;
+                border-radius:20px;
+                background-color:#aaaa;
+                backdrop-filter:blur(8px);
+            }
+            ::backdrop{
+                background-color: #00000055;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="item-container">
+            <a href="https://mail.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/gmail.png">
+                    <figcaption>Gmail</figcaption>
+                </figure>
+            </div>
+            </a>
+            <a href="https://drive.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/googledrive.png">
+                    <figcaption>ドライブ</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://classroom.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/classroom.png">
+                    <figcaption>Classroom</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://docs.google.com/document" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/document.png">
+                    <figcaption>Documents</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://docs.google.com/spreadsheets" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/spreadsheet.png">
+                    <figcaption>Spreadsheets</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://docs.google.com/presentation" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/slide.png">
+                    <figcaption>Slides</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://docs.google.com/forms" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/form.png">
+                    <figcaption>Forms</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://chat.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/chat.svg">
+                    <figcaption>チャット</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://calendar.google.com/calendar" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/calendar.png">
+                    <figcaption>カレンダー</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://meet.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/meet.png">
+                    <figcaption>Meet</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://sites.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/site.png">
+                    <figcaption>Sites</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://contacts.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/contacts.png">
+                    <figcaption>連絡先</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://groups.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/groups.png">
+                    <figcaption>グループ</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://www.youtube.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/youtube.svg">
+                    <figcaption>Youtube</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://maps.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/maps.png">
+                    <figcaption>マップ</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://news.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/news.png">
+                    <figcaption>ニュース</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://photos.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/photos.png">
+                    <figcaption>フォト</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://translate.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/translate.webp">
+                    <figcaption>翻訳</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://keep.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/keep.png">
+                    <figcaption>Keep</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://jamboard.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/jamboard.png">
+                    <figcaption>Jamboard</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://earth.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/earth.png">
+                    <figcaption>Earth</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://fonts.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/test.svg">
+                    <figcaption>Fonts</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://script.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/script.svg">
+                    <figcaption>Apps Script</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://colab.research.google.com/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/colab.png">
+                    <figcaption>colaboratory</figcaption>
+                </figure>
+            </div></a>
+        <!--</div>
+        <div class="item-container">-->
+            <a href="https://document.new/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/document.png">
+                    <figcaption>新規作成</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://spreadsheet.new/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/spreadsheet.png">
+                    <figcaption>新規作成</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://slides.new/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/slide.png">
+                    <figcaption>新規作成</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://drawings.new/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/draw.png">
+                    <figcaption>新規作成</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://sites.new/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/site.png">
+                    <figcaption>新規作成</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://forms.new/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/form.png">
+                    <figcaption>新規作成</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://script.new/" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/script.svg">
+                    <figcaption>新規作成</figcaption>
+                </figure>
+            </div></a>
+            <!--</div>
+            <div class="item-container">-->
+            <a href="https://login.microsoftonline.com/login.srf" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/microsoft.png" style="border-radius:20%">
+                    <figcaption>Microsoft 365</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://creativecloud.adobe.com/cc/?locale=jp" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/adobe.svg">
+                    <figcaption>Adobe</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://www.desmos.com/calculator?lang=ja" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/desmos2.png" style="background:white;border-radius:10px;">
+                    <figcaption>Desmos</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://loilonote.app" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/loilonote.png" style="background:white;border-radius:10px;">
+                    <figcaption>ロイロノート</figcaption>
+                </figure>
+            </div></a>
+            <a href="https://vscode.dev" target="_top"><div class="item">
+                <figure>
+                    <img src="googleappsicon/vscode.png" style="background:white;border-radius:50%;">
+                    <figcaption>Visual Studio Code</figcaption>
+                </figure>
+            </div></a>
+            <a id="addbutton" class="nodrag" draggable="false" target="_top"><div class="item">
+                <figure>
+                    <img draggable="false" src="googleappsicon/add.svg" style="background-color: white;border-radius: 10px;">
+                    <figcaption>追加</figcaption>
+                </figure>
+            </div></a>
+            <a id="trasharea" style="display:none;" class="nodrag nomove" draggable="false" target="_top"><div class="item">
+                <figure>
+                    <img draggable="false" src="googleappsicon/trash.svg" style="background-color: white;border-radius: 10px;">
+                    <figcaption>削除</figcaption>
+                </figure>
+            </div></a>
+            </div>
+        </div>
+        <!--<hr>
+        <div style="padding-left:5%;font-size:20px;">Google 以外のアプリ</div>
+        <div class="item-container">
+            
+        </div>-->
+        <div style="padding-left: 3%;"><button id="narabikae" style="padding-top:5px;height:fit-content;width:fit-content;padding-bottom:5px;padding-left:10px;padding-right:10px;border-radius: 10px;">並びかえる & 削除</button></div>
+        <dialog id="addappdialog">
+            <table>
+            <tr><td><label for="addappname">アプリ名</label></td><td><input id="addappname" type="text"></td></tr>
+            <tr><td><label for="addappurl">URL</label></td><td><input id="addappurl" type="url"></td></tr>
+            <tr><td>画像<td><button id="addappimage_button">ファイルを選択</button><input style="display:none" type="file" id="addappimage"></tr></table>
+            <div id="addappdialog_message"></div>
+            <div style="text-align:center;margin-top:10px"><button id="addappdialog_ok">ok</button> <button id="addappdialog_cancel">cancel</button></div>
+        </dialog>
+    </body>
+</html>

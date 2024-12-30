@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="./js/keyboardshortcuts.js"></script>
+        <style>
+            .selected{background-color: #59ca;}
+            kbd{
+                background-color:#ddda;
+                padding:5px;
+                border-radius:5px;
+            }
+            *{font-size:1.05em}
+            #outputarea{
+                padding:10px
+            }
+            td{
+                height:2em;
+            }
+        </style>
+    </head>
+    <body style="margin:0">
+        <div style="width:min(20vw,150px);left:0;position:fixed;border-right:solid 1px;height:100dvh">
+            <div style="display: flex;justify-content:flex-start;align-items: center;height:100dvh;flex-direction: column;" id="menubar">
+                <div style="width:100%;height:3em;display: flex;align-items: center;"><div>メニュー操作</div></div>
+            </div>
+        </div>
+        <div style="width:calc(100vw - min(20vw,150px));position:fixed;left:min(20vw,150px);overflow:scroll;height:100%" id="outputarea"></div>
+    </body>
+</html>
